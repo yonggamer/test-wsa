@@ -1,0 +1,14 @@
+name: Clone Repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v3
+
+      - name: Clone external repository
+        run: git clone https://github.com/LSPosed/MagiskOnWSALocal.git --depth 1
