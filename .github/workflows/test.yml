@@ -1,0 +1,30 @@
+name: Clone and Commit Files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clone-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v3
+
+      - name: Clone external repository
+        run: git clone https://github.com/LSPosed/MagiskOnWSALocal.git --depth 1
+
+      - name: Copy files to repository
+        run: |
+          cp -r MagiskOnWSALocal/* .
+          rm -rf MagiskOnWSALocal
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m 'Add files from MagiskOnWSALocal'
+          git push
